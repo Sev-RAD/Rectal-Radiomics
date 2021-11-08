@@ -2,10 +2,23 @@
 # Written by Sungwon Kim, MD, PhD, Jaeseung Shin, MD, PhD, Kyunghwa Han, PhD. 
 # Department of Radiology, Yonsei University College of Medicine
 # 
-# This radiomics study was performed using the R program. 
-# Most of the R commands were executed using the command line console, and only the parts
-# that should be collectively executed were written as sources in the form of modules.
-# For related questions, please contact the following e-mail: dinbe@yuhs.ac
+# The radiomics-related R codes that are important for performing this study are described here.
+# Radiomic features were extracted separately for the T2WIs and ADC maps using PyRadiomics 
+# open-source Python package (version 2.1.2; https://pyradiomics.readthedocs.io/). 
+# All radiomic features implemented in PyRadiomics were extracted in the original image and 
+# filtered images, including wavelet and Laplacian of Gaussian. Before the feature extraction,
+# Z-score normalization of the MRI signal intensities only for T2WIs, gray-level discretization 
+# with fixed bin width values of 3 (T2WIs) and 20 (ADC maps), and voxel size resampling by 1*1*1mm
+# were performed using PyRadiomics. Consequently, 1132 features were obtained for each T2WI and ADC map. 
+# Feature selection and classification model building. Hierarchical feature clustering was performed
+# using Spearman correlation coefficient to reduce redundancy among radiomic features. Subsequently,
+# the least absolute shrinkage and selection operator (LASSO) method was used to select the most useful
+# predictive features from the training set. A radiomics score (RAD score) was calculated for each 
+# patient as a linear combination of the selected features weighted by their respective coefficients.
+# To find an optimal regulation weight (λ) in LASSO logistic regression, ten-fold cross validation
+# with minimum criteria was employed, where the final value of λ yielded minimum binomial deviance. 
+# 
+# For related questions, please contact the following e-mail: dinbe@yuhs.ac (Sungwon Kim)
 
 
 
